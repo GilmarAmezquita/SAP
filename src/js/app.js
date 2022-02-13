@@ -148,6 +148,16 @@ let Register = {
         })
     }
 }
+let Login = {
+    render : async () => {
+        return `
+            <section class="section">
+                
+            </section>
+        `;
+    },
+    after_render: async () => {}
+}
 
 let Navbar = {
     render: async () => {
@@ -182,8 +192,8 @@ let Navbar = {
                                     <a class="button is-primary" href="#/register">
                                         <strong>Sign up</strong>
                                     </a>
-                                    <a class="button is-light">
-                                        Log in
+                                    <a class="button is-light" href="#/login">
+                                        <strong>Log in</strong>
                                     </a>
                                 </div>
                             </div>
@@ -237,6 +247,7 @@ const routes = {
     , '/about': About
     , '/p/:id': PostShow
     , '/register': Register
+    , '/login' : Login
 }
 const router = async () => {
     //html divs
