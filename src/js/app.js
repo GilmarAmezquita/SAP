@@ -153,18 +153,24 @@ let Login = {
         return `
             <section class="section">
                 <div class="field">
-                    <p class="control has-icons-left">
+                    <p class="control has-icons-left has-icons-right">
                         <input class="input" id="usernameLogin" type="username" placeholder="Enter your username">
                         <span class="icon is-small is-left">
                             <i class="fa-solid fa-user"></i>
                         </span>
+                        <span class="icon is-small is-right" id="usernameMark">
+                            <i class="fa-solid fa-circle-xmark" ></i>
+                        </span>
                     </p>
                 </div>
                 <div class="field">
-                    <p class="control has-icons-left">
+                    <p class="control has-icons-left has-icons-right">
                         <input class="input" id="passwordLogin" type="password" placeholder="Enter your password">
                         <span class="icon is-small is-left">
                             <i class="fas fa-lock"></i>
+                        </span>
+                        <span class="icon is-small is-right" id="passwordMark">
+                            <i class="fa-solid fa-circle-xmark"></i>
                         </span>
                     </p>
                 </div>
@@ -179,6 +185,20 @@ let Login = {
         `;
     },
     after_render: async () => {
+        document.getElementById("usernameLogin").addEventListener("input", () =>{
+            let i = document.createElement('i');
+            if(usernameLogin.value == ''){
+                i.className = 'fa-solid fa-circle-xmark';
+            }else i.className = 'fa-solid fa-circle-check';
+            document.getElementById("usernameMark").replaceChildren(i);
+        });
+        document.getElementById("passwordLogin").addEventListener("input",() => {
+            let i = document.createElement('i');
+            if(passwordLogin.value == ''){
+                i.className = 'fa-solid fa-circle-xmark';
+            }else i.className = 'fa-solid fa-circle-check';
+            document.getElementById("passwordMark").replaceChildren(i);
+        })
         document.getElementById("login_submit_btn").addEventListener("click", () => {
             let username = document.getElementById("usernameLogin");
             let password = document.getElementById("passwordLogin");
