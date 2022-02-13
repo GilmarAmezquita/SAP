@@ -25,10 +25,10 @@ let Home = {
             <section class="section">
                 <h1> Home </h1>
                 <ul>
-                    ${ posts.map(post => 
-                        `<li><a href="#/p/${post.id}">${post.title}</a></li>`
-                        ).join('\n ')
-                    }
+                ${ posts.map(post => 
+                    `<li><a href="#/p/${post.id}">${post.title}</a></li>`
+                    ).join('\n ')
+                }
                 </ul>
             </section>
         `;
@@ -80,15 +80,79 @@ let PostShow = {
         let post = await getPost(request.id);
         return `
             <section class="section">
-                <h1> Post Id : ${post.id}</h1>
-                <p> Post Title : ${post.title} </p>
-                <p> Post Content : ${post.content} </p>
-                <p> Post Author : ${post.name} </p>
+                <h1 > Post Id : 
+                    <input id="postIdInput" readonly placeholder="${post.id}">
+                </h1>
+                <p> Post Title : 
+                    <input id="postTitleInput" readonly placeholder="${post.title}"> 
+                </p>
+                <p> Post Title : 
+                    <input id="postContentInput" readonly placeholder="${post.content}"> 
+                </p>
+                <p> Post Title : 
+                    <input id="postNameInput" readonly placeholder="${post.name}"> 
+                </p>
             </section>
+            <button id="editBtn">Edit</button>
+            <button id="update">Update</button>
         `;
     }
-    , after_render: async () => {}
+    , after_render: async () => {
+        document.getElementById("editBtn").addEventListener 
+        ("click",  () => {
+            document.getElementById("postIdInput").readOnly = false;
+            document.getElementById("postTitleInput").readOnly = false;
+            document.getElementById("postContentInput").readOnly = false;
+            document.getElementById("postNameInput").readOnly = false;
+            alert (`Now you can edit the blanks`)
+        })
+    }
 }
+
+let editPostFeatures =  {
+    render: async () => {
+        return `
+        <section class="section">
+            <div class="field">
+                <p>
+                    <input class="input" id="email_input" type="email" placeholder="Enter your Email">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" id="pass_input" type="password" placeholder="Enter a Password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" id="repeat_pass_input" type="password" placeholder="Enter the same Password again">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <button class="button is-primary" id="register_submit_btn">
+                    Register
+                    </button>
+                </p>
+            </div>
+        </section>
+    `
+    }
+    , after_render: () => {}
+}
+
 let Register = {
     render: async () => {
         return `
