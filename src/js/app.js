@@ -88,21 +88,23 @@ let PostShow = {
                 <p> Post Author : ${post.name} </p>
             </section>
             <section class="section">
-                <h1 > Post Id : 
-                    <input id="postIdInput" readonly placeholder="${post.id}">
+                <h1 > <strong>Post Id</strong> : 
+                    <input class="input" id="postIdInput" readonly placeholder="${post.id}">
                 </h1>
-                <p> Post Title : 
-                    <input id="postTitleInput" readonly placeholder="${post.title}"> 
+                <p> <strong>Post Title</strong> : 
+                    <input class="input" id="postTitleInput" readonly placeholder="${post.title}"> 
                 </p>
-                <p> Post Content : 
-                    <input id="postContentInput" readonly placeholder="${post.content}"> 
+                <p> <strong>Post Content</strong> : 
+                    <input class="input" id="postContentInput" readonly placeholder="${post.content}"> 
                 </p>
-                <p> Post Author : 
-                    <input id="postNameInput" readonly placeholder="${post.name}"> 
+                <p> <strong>Post Author</strong> : 
+                    <input class="input" id="postNameInput" readonly placeholder="${post.name}"> 
                 </p>
             </section>
-            <button id="editBtn">Edit</button>
-            <button id="update">Update</button>
+            <div> 
+                <button class="button is-primary" id="editBtn">Edit</button>
+                <button class="button is-primary" id="update">Update</button>
+            </div>
         `;
     }
     , after_render: async () => {
@@ -117,50 +119,6 @@ let PostShow = {
             } else alert('You are not loged');
         })
     }
-}
-
-let editPostFeatures =  {
-    render: async () => {
-        return `
-        <section class="section">
-            <div class="field">
-                <p>
-                    <input class="input" id="email_input" type="email" placeholder="Enter your Email">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-envelope"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                        <i class="fas fa-check"></i>
-                    </span>
-                </p>
-            </div>
-            <div class="field">
-                <p class="control has-icons-left">
-                    <input class="input" id="pass_input" type="password" placeholder="Enter a Password">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-lock"></i>
-                    </span>
-                </p>
-            </div>
-            <div class="field">
-                <p class="control has-icons-left">
-                    <input class="input" id="repeat_pass_input" type="password" placeholder="Enter the same Password again">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-lock"></i>
-                    </span>
-                </p>
-            </div>
-            <div class="field">
-                <p class="control">
-                    <button class="button is-primary" id="register_submit_btn">
-                    Register
-                    </button>
-                </p>
-            </div>
-        </section>
-    `
-    }
-    , after_render: () => {}
 }
 
 let Register = {
