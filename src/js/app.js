@@ -87,37 +87,48 @@ let PostShow = {
                 <p> Post Content : ${post.content} </p>
                 <p> Post Author : ${post.name} </p>
             </section>
-            <section class="section">
-                <h1 > <strong>Post Id</strong> : 
-                    <input class="input" id="postIdInput" readonly placeholder="${post.id}">
-                </h1>
-                <p> <strong>Post Title</strong> : 
-                    <input class="input" id="postTitleInput" readonly placeholder="${post.title}"> 
-                </p>
-                <p> <strong>Post Content</strong> : 
-                    <input class="input" id="postContentInput" readonly placeholder="${post.content}"> 
-                </p>
-                <p> <strong>Post Author</strong> : 
-                    <input class="input" id="postNameInput" readonly placeholder="${post.name}"> 
-                </p>
-            </section>
             <div> 
-                <button class="button is-primary" id="editBtn">Edit</button>
-                <button class="button is-primary" id="update">Update</button>
+                <button class="button is-primary" id="editBtn" value="${post.id}">Edit</button>
             </div>
         `;
     }
     , after_render: async () => {
         document.getElementById("editBtn").addEventListener 
         ("click",  () => {
+            let id = document.getElementById('editBtn').value;
             if(loged){
-                document.getElementById("postIdInput").readOnly = false;
-                document.getElementById("postTitleInput").readOnly = false;
-                document.getElementById("postContentInput").readOnly = false;
-                document.getElementById("postNameInput").readOnly = false;
-                alert (`Now you can edit the blanks`)
+                window.location.replace(`#/edit/${id}`);
             } else alert('You are not loged');
         })
+    }
+}
+
+let Edit = {
+    render: async () =>{
+        let request = Utils.parseRequestURL();
+        let post = await getPost(request.id);
+        return `
+            <section class="section">
+                <h1 > <strong>Post Id</strong> : 
+                    <input class="input" id="postIdInput" value="${post.id}">
+                </h1>
+                <p> <strong>Post Title</strong> : 
+                    <input class="input" id="postTitleInput" value="${post.title}"> 
+                </p>
+                <p> <strong>Post Content</strong> : 
+                    <input class="input" id="postContentInput" value="${post.content}"> 
+                </p>
+                <p> <strong>Post Author</strong> : 
+                    <input class="input" id="postNameInput" value="${post.name}"> 
+                </p>
+                <div style="Margin-top: 5px;">
+                    <button class="button is-primary" id="update" ">Update</button>
+                </div>
+            </section>
+        `;
+    },
+    after_render: async () =>{
+
     }
 }
 
@@ -334,6 +345,7 @@ const routes = {
     , '/p/:id': PostShow
     , '/register': Register
     , '/login' : Login
+    , '/edit/:id' : Edit
 }
 const router = async () => {
     //html divs
