@@ -71,7 +71,7 @@ let getPost = async (id) => {
        //const response = await fetch(gistJson + id, options);
        //const json = await response.json();
        // console.log(json)
-       return gistJson;
+       return gistJson[id-1];
    } catch (err) {
        console.log('Error getting documents', err);
    }
